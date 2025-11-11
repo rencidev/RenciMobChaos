@@ -8,4 +8,4 @@ mobs:
   - chicken
   - pig
 messages: # compatible minimessage
-  mob-spawn: "<gradient:red:orange>ВЗРЫВ!</gradient> <red>Из земли вылез <bold><color:#ff5555>{mob}</color></bold>!</red>"
+  mob-spawn: "<gradient:#74FF94:#B4EDFF>Explosion!</gradient> <red>Came out of the ground <bold><color:#ff5555><mob></color></bold>!</red>"

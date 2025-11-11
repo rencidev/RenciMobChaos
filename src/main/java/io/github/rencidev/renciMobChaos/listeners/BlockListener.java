@@ -2,6 +2,7 @@ package io.github.rencidev.renciMobChaos.listeners;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -29,7 +30,7 @@ public class BlockListener implements Listener {
         Block block = event.getBlock();
 
         String spawnMobMessage = plugin.getConfig().getString("messages.mob-spawn");
-        int chance = plugin.getConfig().getInt("spawn-chance") / 100;
+        double chance = plugin.getConfig().getInt("spawn-chance") / (double)100;
         List<EntityType> mobs = plugin.getConfig().getStringList("mobs").stream()
                 .map(str -> {
                     try {
@@ -59,10 +60,12 @@ public class BlockListener implements Listener {
                     block.getWorld().spawnParticle(Particle.EXPLOSION, spawnLoc.add(0.5, 0.5, 0.5), 25);
                     block.getWorld().playSound(block.getLocation(), Sound.ENTITY_CREEPER_PRIMED, 0.6f, 1.8f);
 
+                    TagResolver resolver = Placeholder.parsed("mob", mob.getName() != null ? mob.getName() : mob.name().toLowerCase());
+
                     // minimessage
                     var componentMobSpawn = MiniMessage.miniMessage().deserialize(
-                            Objects.requireNonNull(spawnMobMessage),
-                            Placeholder.unparsed("mob", mob.name().toLowerCase())
+                            spawnMobMessage,
+                            resolver
                     );
 
                     event.getPlayer().sendMessage(componentMobSpawn);
