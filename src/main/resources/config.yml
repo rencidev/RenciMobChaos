@@ -1,0 +1,11 @@
+# RenciMobChaos by RenciDev
+spawn-chance: 50 # Spawn chance: from 0% to 100%
+radius: 4 # Spawn radius
+mobs:
+  - zombie
+  - skeleton
+  - creeper
+  - chicken
+  - pig
+messages: # compatible minimessage
+  mob-spawn: "<gradient:red:orange>ВЗРЫВ!</gradient> <red>Из земли вылез <bold><color:#ff5555>{mob}</color></bold>!</red>"
